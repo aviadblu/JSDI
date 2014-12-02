@@ -1,0 +1,18 @@
+{
+  "name"         : "orion_test",
+  "version"      : "0.0.0",
+  "description"  : "Simple node application.",
+  "main"         : "server.js",
+  "author"       : "Scotch",
+  "scripts": {
+	"start": "sudo nodejs server.js",
+	"stop": "echo 'stop'",
+	"restart": "echo 'restart'"
+  },
+  "dependencies" : {
+    "express"    : "~4.7.2",
+    "morgan"     : "~1.2.2",
+    "body-parser": "~1.5.2",
+    "method-override": "~2.1.2"
+    }
+}

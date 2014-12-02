@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+    <h2>My first orion node app</h2>
+        <div>TODO write content</div>
+    </body>
+    
+    <script>
+    	var testController = function (demoFunction) {
+		    document.write(demoFunction.service1());
+		};
+		
+		var DemoAngular = {
+		    
+		    dependencies: {},
+		    
+		    start: function(target) {
+		    	
+		    	// angular regex 
+		        var FN_ARGS = /^function\s*[^\(]*\(\s*([^\)]*)\)/m;
+		        var FN_ARG_SPLIT = /,/;
+		        var FN_ARG = /^\s*(_?)(\S+?)\1\s*$/;
+		        var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
+		        
+		        // convert the ctrl to a string:
+		        var text = target.toString().replace(STRIP_COMMENTS, '');		        
+		        // split args from controller function (userServices)
+		        var args = text.match(FN_ARGS)[1].split(FN_ARG_SPLIT);
+				// apply the real function inside the controller by name extracted from string
+		        target.apply(target, this.getDependencies(args));
+		    },
+		    
+		    getDependencies: function(arr) {
+		        var self = this;
+		        return arr.map(function(value) {
+		            return self.dependencies[value];
+		        });            
+		    },
+		    
+		    register: function(name, dependency) {
+		    	// register injected class to the injector
+		        this.dependencies[name] = dependency;
+		    }
+		
+		};
+
+		
+		var demoFunction = {
+		    service1: function() {
+		      	return 'service 1 called';
+		    },
+		    service2: function(){
+		    	return 'service 2 called';
+		    },
+		    service3: function(){
+		    	return 'service 3 called';
+		    }
+		};
+		
+		// Register service
+		DemoAngular.register('demoFunction', demoFunction);
+		// start the controller services functionallity
+		DemoAngular.start(testController);
+
+    </script>
+</html>
