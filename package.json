@@ -3,7 +3,7 @@
   "version"      : "0.0.0",
   "description"  : "Simple node application.",
   "main"         : "server.js",
-  "author"       : "Scotch",
+  "author"       : "Aviad Blumenfeld",
   "scripts": {
 	"start": "sudo nodejs server.js",
 	"stop": "echo 'stop'",
